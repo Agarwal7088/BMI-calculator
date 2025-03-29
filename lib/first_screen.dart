@@ -1,5 +1,6 @@
 import 'package:bmi_calculator/Iconcontent.dart';
 import 'package:bmi_calculator/reuseablecard.dart';
+import 'package:bmi_calculator/roundiconbutton.dart';
 import 'package:flutter/material.dart';
 import 'constant.dart';
 
@@ -17,6 +18,8 @@ class FirstScreen extends StatefulWidget {
 
 Gender? selectedGender;
 int height = 180;
+int weight = 60;
+int age = 20;
 // Color malecardColour = activeCardColor;
 // Color femalecardColour = activeCardColor;
 
@@ -108,6 +111,7 @@ class _FirstScreenState extends State<FirstScreen> {
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       activeTrackColor: Colors.white,
+                      inactiveTrackColor: Color(0xFF8D8E98),
                       overlayColor: Color(0xFFEB1555),
                       thumbColor: Color(0x29EB1555),
                       thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
@@ -117,8 +121,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       value: height.toDouble(),
                       min: 120,
                       max: 220,
-                      activeColor: Color(0xFFEB1555),
-                      inactiveColor: Color(0xFF8D8E98),
+
                       onChanged: (double newValue) {
                         setState(() {
                           height = newValue.round();
@@ -133,22 +136,86 @@ class _FirstScreenState extends State<FirstScreen> {
 
           Row(
             children: [
-              Expanded(child: Newreuseablecard(colour: kactiveCardColor)),
+              Expanded(
+                child: Newreuseablecard(
+                  colour: kactiveCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('WEIGHT', style: labelTextStyle),
+                      Text(weight.toString(), style: labelTextStyle),
+                      Row(
+                        children: [
+                          RoundIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
 
-              Expanded(child: Newreuseablecard(colour: kactiveCardColor)),
+                          SizedBox(width: 10),
+                          RoundIconButton(
+                            icon: IconData(0xF70F),
+                            onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              Expanded(
+                child: Newreuseablecard(
+                  colour: kactiveCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('AGE', style: labelTextStyle),
+                      Text(age.toString(), style: labelTextStyle),
+                      Row(
+                        children: [
+                          RoundIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+
+                          SizedBox(width: 10),
+                          RoundIconButton(
+                            icon: IconData(0xF70F),
+                            onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
-          Expanded(
-            child: Container(
-              // height: 0,
-              width: double.infinity,
-              height: 80.0,
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                //color: colour,
-                color: Color(0xFFEB1555),
-                borderRadius: BorderRadius.circular(10),
-              ),
+          Container(
+            // height: 0,
+            width: double.infinity,
+            height: 80.0,
+            margin: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              //color: colour,
+              color: Color(0xFFEB1555),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ],
