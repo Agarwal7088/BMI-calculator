@@ -1,9 +1,10 @@
 import 'package:bmi_calculator/Iconcontent.dart';
 import 'package:bmi_calculator/reuseablecard.dart';
 import 'package:flutter/material.dart';
+import 'constant.dart';
 
-const inactiveCardColor = Color(0xFF111328);
-const activeCardColor = Color(0xFF1D1E33);
+// const inactiveCardColor = Color(0xFF111328);
+// const activeCardColor = Color(0xFF1D1E33);
 
 enum Gender { male, female }
 
@@ -15,6 +16,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 Gender? selectedGender;
+int height = 180;
 // Color malecardColour = activeCardColor;
 // Color femalecardColour = activeCardColor;
 
@@ -40,10 +42,12 @@ Gender? selectedGender;
 class _FirstScreenState extends State<FirstScreen> {
   @override
   Widget build(BuildContext context) {
+    //current state of our app how our app appearing as it is
     return Scaffold(
       appBar: AppBar(title: Center(child: Text("BMI CALCULATOR"))),
 
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
@@ -57,9 +61,9 @@ class _FirstScreenState extends State<FirstScreen> {
                   //colour: malecardColour,
                   colour:
                       selectedGender == Gender.male
-                          ? activeCardColor
-                          : inactiveCardColor,
-                  cardChild: Iconcontent(label: "FEMALE"),
+                          ? kactiveCardColor
+                          : kinactiveCardColor,
+                  cardChild: Iconcontent(label: "FEMALE", ic: Icons.female),
                 ),
               ),
 
@@ -72,20 +76,66 @@ class _FirstScreenState extends State<FirstScreen> {
                   },
                   colour:
                       selectedGender == Gender.female
-                          ? activeCardColor
-                          : inactiveCardColor,
-                  cardChild: Iconcontent(label: "MALE"),
+                          ? kactiveCardColor
+                          : kinactiveCardColor,
+                  cardChild: Iconcontent(label: "MALE", ic: Icons.male),
                 ),
               ),
             ],
           ),
-          Expanded(child: Newreuseablecard()),
+          Expanded(
+            child: Newreuseablecard(
+              colour: kactiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("HEIGHT", style: labelTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text(
+                        height.toString(),
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Text('cm', style: labelTextStyle),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      overlayColor: Color(0xFFEB1555),
+                      thumbColor: Color(0x29EB1555),
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120,
+                      max: 220,
+                      activeColor: Color(0xFFEB1555),
+                      inactiveColor: Color(0xFF8D8E98),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
           Row(
             children: [
-              Expanded(child: Newreuseablecard()),
+              Expanded(child: Newreuseablecard(colour: kactiveCardColor)),
 
-              Expanded(child: Newreuseablecard()),
+              Expanded(child: Newreuseablecard(colour: kactiveCardColor)),
             ],
           ),
           Expanded(

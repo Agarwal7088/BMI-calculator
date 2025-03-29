@@ -9,15 +9,14 @@ class Newreuseablecard extends StatelessWidget {
   });
 
   final Color? colour;
-  final Function? onpress;
+  final VoidCallback? onpress;
   final Widget? cardChild;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onpress;
-      },
+      onTap: onpress,
+
       child: Container(
         child: cardChild,
         height: 200,
