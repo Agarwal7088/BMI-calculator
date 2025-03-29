@@ -48,39 +48,33 @@ class _FirstScreenState extends State<FirstScreen> {
           Row(
             children: [
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
+                child: Newreuseablecard(
+                  onpress: () {
                     setState(() {
-                      //updateColour(Gender.male);
                       selectedGender = Gender.male;
                     });
                   },
-                  child: Newreuseablecard(
-                    //colour: malecardColour,
-                    colour:
-                        selectedGender == Gender.male
-                            ? activeCardColor
-                            : inactiveCardColor,
-                    cardChild: Iconcontent(label: "FEMALE"),
-                  ),
+                  //colour: malecardColour,
+                  colour:
+                      selectedGender == Gender.male
+                          ? activeCardColor
+                          : inactiveCardColor,
+                  cardChild: Iconcontent(label: "FEMALE"),
                 ),
               ),
 
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
+                child: Newreuseablecard(
+                  onpress: () {
                     setState(() {
-                      // updateColour(Gender.female);
                       selectedGender = Gender.female;
                     });
                   },
-                  child: Newreuseablecard(
-                    colour:
-                        selectedGender == Gender.female
-                            ? activeCardColor
-                            : inactiveCardColor,
-                    cardChild: Iconcontent(label: "MALE"),
-                  ),
+                  colour:
+                      selectedGender == Gender.female
+                          ? activeCardColor
+                          : inactiveCardColor,
+                  cardChild: Iconcontent(label: "MALE"),
                 ),
               ),
             ],
