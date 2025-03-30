@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/Iconcontent.dart';
+import 'package:bmi_calculator/result_page.dart';
 import 'package:bmi_calculator/reuseablecard.dart';
 import 'package:bmi_calculator/roundiconbutton.dart';
 import 'package:flutter/material.dart';
@@ -148,7 +149,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         children: [
                           RoundIconButton(
                             icon: Icons.add,
-                            onPressed: () {
+                            onpress: () {
                               setState(() {
                                 weight++;
                               });
@@ -158,7 +159,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           SizedBox(width: 10),
                           RoundIconButton(
                             icon: IconData(0xF70F),
-                            onPressed: () {
+                            onpress: () {
                               setState(() {
                                 weight--;
                               });
@@ -183,7 +184,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         children: [
                           RoundIconButton(
                             icon: Icons.add,
-                            onPressed: () {
+                            onpress: () {
                               setState(() {
                                 weight++;
                               });
@@ -193,7 +194,7 @@ class _FirstScreenState extends State<FirstScreen> {
                           SizedBox(width: 10),
                           RoundIconButton(
                             icon: IconData(0xF70F),
-                            onPressed: () {
+                            onpress: () {
                               setState(() {
                                 weight--;
                               });
@@ -207,15 +208,24 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ],
           ),
-          Container(
-            // height: 0,
-            width: double.infinity,
-            height: 80.0,
-            margin: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              //color: colour,
-              color: Color(0xFFEB1555),
-              borderRadius: BorderRadius.circular(10),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ResultsPage()),
+              );
+            },
+            child: Container(
+              // height: 0,
+              child: Text('CALCULATE'),
+              width: double.infinity,
+              height: 80.0,
+              margin: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                //color: colour,
+                color: Color(0xFFEB1555),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ],
