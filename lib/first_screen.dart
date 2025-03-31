@@ -1,9 +1,12 @@
 import 'package:bmi_calculator/Iconcontent.dart';
+import 'package:bmi_calculator/botton_botton.dart';
+import 'package:bmi_calculator/calculate_brain.dart';
 import 'package:bmi_calculator/result_page.dart';
 import 'package:bmi_calculator/reuseablecard.dart';
 import 'package:bmi_calculator/roundiconbutton.dart';
 import 'package:flutter/material.dart';
 import 'constant.dart';
+//port 'calculate_brain.dart';
 
 // const inactiveCardColor = Color(0xFF111328);
 // const activeCardColor = Color(0xFF1D1E33);
@@ -208,25 +211,25 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
             ],
           ),
-          GestureDetector(
+          BottomButton(
             onTap: () {
+              CalculateBrain calc = CalculateBrain(
+                height: height,
+                weight: weight,
+              );
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ResultsPage()),
+                MaterialPageRoute(
+                  builder:
+                      (context) => ResultsPage(
+                        bmiResult: calc.calculateBMI(),
+                        interpretation: calc.getInterpretation(),
+                        resultText: calc.getResult(),
+                      ),
+                ),
               );
             },
-            child: Container(
-              // height: 0,
-              child: Text('CALCULATE'),
-              width: double.infinity,
-              height: 80.0,
-              margin: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                //color: colour,
-                color: Color(0xFFEB1555),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+            buttonTitle: 'CALCULATE',
           ),
         ],
       ),
